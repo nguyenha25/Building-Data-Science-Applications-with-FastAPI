@@ -24,7 +24,7 @@ async def get(id: int) -> User:
 @router.post("/", status_code=status.HTTP_201_CREATED)
 async def create(user_create: UserCreate) -> User:
     new_id = max(db.users.keys() or (0,)) + 1
-    user = User(id=new_id, **user_create.dict())
+    user = User(id=new_id, **user_create.model_dump())
     db.users[new_id] = user
     return user
 
