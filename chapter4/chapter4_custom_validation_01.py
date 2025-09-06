@@ -1,6 +1,6 @@
 from datetime import date
 
-from pydantic import BaseModel, ValidationError, validator
+from pydantic import BaseModel, ValidationError, field_validator
 
 
 class Person(BaseModel):
@@ -8,7 +8,7 @@ class Person(BaseModel):
     last_name: str
     birthdate: date
 
-    @validator("birthdate")
+    @field_validator("birthdate")
     def valid_birthdate(cls, v: date):
         delta = date.today() - v
         age = delta.days / 365
